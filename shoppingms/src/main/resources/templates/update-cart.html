@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Cart</title>
+    <style>
+        body {
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+<!--  justify-content: center;-->
+<!--  align-items: center;-->
+  height: 100%;
+}
+
+.card {
+  width: 400px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  border-top: 4px solid rgba(255, 153, 51);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin : 10px;
+}
+
+.card1 {
+  width: 400px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  border-top: 4px solid rgba(255, 153, 51);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin : 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input {
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #ccc;
+  color: #333;
+}
+select {
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #ccc;
+  color: #333;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.buttons2 {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+}
+
+.submit-button {
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.heading{
+    color:  rgba(255, 153, 51);
+    text-align: center;
+}
+
+.warning{
+    color:red;
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+th{
+     background-color:rgb(233, 116, 81);
+     padding:5px;
+     margin:5px;
+     color:white;
+}
+td{
+     background-color:rgb(250, 213, 165);
+     padding:5px;
+     margin:5px;
+}
+
+    </style>
+    <script>
+        function pop() {
+             alert("Please Confirm to Add Product To Cart");
+        }
+        function submit() {
+             alert("Please Confirm To Submit The Cart Items");
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="card1">
+            <h2 class="heading">
+                Product List
+            </h2>
+            <table>
+                <tr>
+                    <thead>
+                    <th>Product Id</th>
+                    <th>Product Name</th>
+                    <th>Product Description</th>
+                    <th>Product Price</th>
+                    <th>Quantity</th>
+                    </thead>
+                </tr>
+                <tr>
+                    <tbody th:each="product:${products}">
+                    <td th:text="${product.productId}"></td>
+                    <td th:text="${product.productName}"></td>
+                    <td th:text="${product.productDescription}"></td>
+                    <td th:text="${product.productPrice}"></td>
+                    <td th:text="${product.quantity}"></td>
+                    </tbody>
+                </tr>
+
+            </table>
+            <br>
+        </div>
+    <div class="card">
+        <form th:action="@{/api/shopping/update-cart}" th:object="${item}" method="POST">
+            <h2 class="heading">
+               Add Products to Your Cart
+            </h2>
+            <label>Product Id</label>
+            <select type="number" th:field="*{productId}">
+                <option value="0"></option>
+                <option th:each="product:${products}" th:value="${product.productId}" th:text="${product.productId}"></option>
+            </select>
+            <label>Product Name</label>
+            <select type="text" th:field="*{productName}">
+                <option value=""></option>
+                <option th:each="product:${products}" th:value="${product.productName}" th:text="${product.productName}"></option>
+            </select>
+            <label>Product Quantity</label>
+            <input type="number" th:field="*{quantity}">
+            <label>Product Price</label>
+            <select type="number" th:field="*{price}">
+                <option value="0"></option>
+                <option th:each="product:${products}" th:value="${product.productPrice}" th:text="${product.productPrice}"></option>
+            </select>
+            <div class="warning">
+                Please select appropriate options referring to the table
+            </div>
+            <div class="buttons">
+                <button class="submit-button" type="submit" th:onclick="pop()">Add Product To Cart</button>
+                <button class="submit-button"><a th:href="@{/api/shopping/options}" th:onclick="submit()">Submit</a></button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

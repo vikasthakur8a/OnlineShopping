@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile Options</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: #f5f5f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+
+      .card {
+        width: 350px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        border-top: 4px solid #f6226f;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+
+      .heading {
+        color: #f6226f;
+        text-align: center;
+      }
+
+      @media (max-width: 480px) {
+        .card {
+          width: 100%;
+          max-width: 350px;
+        }
+      }
+
+      #matrix {
+        margin: 0 auto;
+        padding: 5px;
+      }
+
+      #matrix tr,
+      td {
+        padding: 5px;
+      }
+
+      #matrix button {
+        height: 80px;
+        width: 150px;
+        border: none;
+        font-family: helvetica;
+        font-weight: bold;
+      }
+
+      #b1 {
+        background-color: rgba(255, 153, 51, 0.5);
+      }
+
+      #b3 {
+        background-color: rgba(196, 138, 195, 0.5);
+      }
+
+      #b1:hover {
+        background-color: rgb(255, 153, 51);
+      }
+
+      #b3:hover {
+        background-color: rgb(196, 138, 195);
+      }
+
+      #b2 {
+        background-color: rgba(15, 138, 15, 0.5);
+      }
+
+      #b2:hover {
+        background-color: rgb(15, 138, 15);
+      }
+
+      #b4 {
+        background-color: rgba(189, 15, 15, 0.6);
+      }
+
+      #b4:hover {
+        background-color: rgb(189, 15, 15);
+      }
+
+      a{
+        text-decoration: none;
+        color: #333;
+      }
+    </style>
+    <script>
+        function pop() {
+             alert("Please Confirm to Logout");
+        }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h1 class="heading">Welcome</h1>
+        <h2 class="heading">Please Choose An Option</h2>
+        <div>
+          <table id="matrix">
+<!--            <tr>-->
+<!--              <td>-->
+<!--                <button id="b1"><a th:href="@{/api/shopping/add-product}">ADD PRODUCT</a></button>-->
+<!--              </td>-->
+<!--              <td>-->
+<!--                <button id="b2"><a th:href="@{/api/shopping/view-products}">VIEW PRODUCTS</a></button>-->
+<!--              </td>-->
+<!--            </tr>-->
+
+            <tr>
+              <td>
+                <button id="b1"><a th:href="@{/api/shopping/update-cart}">ADD PRODUCTS TO CART</a></button>
+              </td>
+              <td>
+                <button id="b2"><a th:href="@{/api/shopping/view-cart}">VIEW CART</a></button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button id="b3"><a th:href="@{/api/shopping/view-order}">VIEW ORDER</a></button>
+              </td>
+              <td>
+                <button id="b4"><a href="http://localhost:9292/api/jwt/login" th:onclick="pop()">LOG OUT</a></button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

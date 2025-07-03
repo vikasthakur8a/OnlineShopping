@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <style>
+        body {
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.card {
+  width: 400px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  border-top: 4px solid rgba(255, 153, 51);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input {
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #ccc;
+  color: #333;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.heading{
+    color:  rgba(255, 153, 51);
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+th{
+     background-color:rgb(233, 116, 81);
+     padding:5px;
+     margin:5px;
+     color:white;
+}
+td{
+     background-color:rgb(250, 213, 165);
+     padding:5px;
+     margin:5px;
+}
+
+.danger{
+     background-color:red;
+     color:white;
+     margin : 2px solid white;
+}
+    </style>
+    <script>
+        function pop() {
+             alert("Please Confirm to Place Order");
+        }
+        function remove() {
+             alert("Please Confirm to Remove Product");
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h2 class="heading">
+            Cart
+        </h2>
+        <b class="heading">Products Present In Your Cart : </b><b th:text="${size}"></b>
+        <br>
+        <br>
+        <table>
+            <tr>
+                <thead>
+                <th>Product Id</th>
+                <th>Product Name</th>
+                <th>Product Quantity</th>
+                <th>Product Price</th>
+                <th>Actions</th>
+                </thead>
+            </tr>
+            <tr>
+                <tbody th:each="item:${items}">
+                <td th:text="${item.productId}"></td>
+                <td th:text="${item.productName}"></td>
+                <td th:text="${item.quantity}"></td>
+                <td th:text="${item.price}"></td>
+                <td>
+                    <button class="danger"><a th:href="@{/api/shopping/delete/{id}(id=${item.itemId})}" class="btn btn-danger" th:onclick="remove()">remove</a></button>
+                </td>
+                </tbody>
+            </tr>
+
+        </table>
+        <br>
+        <div class="buttons">
+            <button class="submit-button"><a th:href="@{/api/shopping/place-order}" th:onclick="pop()">Place Order</a></button>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
